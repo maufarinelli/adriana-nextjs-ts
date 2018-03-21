@@ -2,7 +2,12 @@ import * as React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-export default ({children = undefined, title = 'This is the default title'}) => (
+interface ILayout {
+    children?: JSX.Element,
+    title?: string
+}
+
+export default ({children = undefined, title = 'This is the default title'}: ILayout) => (
   <div>
     <Head>
       <title>{title}</title>
