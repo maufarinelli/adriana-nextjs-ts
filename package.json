@@ -10,7 +10,8 @@
     "dev": "concurrently \"npm run watch:tsc\" \"next ./dist\"",
     "start": "next start ./dist",
     "tsc": "tsc",
-    "watch:tsc": "tsc --watch"
+    "watch:tsc": "tsc --watch",
+    "prod": "pm2 start npm --name \"next\" -- start"
   },
   "dependencies": {
     "isomorphic-unfetch": "^2.0.0",
