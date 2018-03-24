@@ -6,10 +6,14 @@ interface AppProps {
     pageJson: object
 }
 
+interface IFetch {
+    json: () => ({})
+}
+
 class Home extends React.Component<any, AppProps> {
     static async getInitialProps(): Promise<object> {
         const url: string = 'http://159.89.116.112/adriana/wp-json/wp/v2/pages/2';
-        const page: Promise<object> = await fetch(url);
+        const page: IFetch = await fetch(url);
         const pageJson: object = await page.json();
         return { pageJson };
     }
