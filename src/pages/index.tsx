@@ -3,7 +3,8 @@ import fetch from 'isomorphic-unfetch';
 import Layout from '../components/Layout';
 
 interface AppProps {
-    pageJson: object
+    page: object,
+    menu: object
 }
 
 interface IFetch {
