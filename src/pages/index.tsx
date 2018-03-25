@@ -1,6 +1,6 @@
 import * as React from 'react';
 import fetch from 'isomorphic-unfetch';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 interface AppProps {
     pageJson: object
@@ -12,23 +12,27 @@ interface IFetch {
 
 class Home extends React.Component<any, AppProps> {
     static async getInitialProps(): Promise<object> {
-        const url: string = 'http://159.89.116.112/adriana/wp-json/wp/v2/pages/2';
-        const page: IFetch = await fetch(url);
-        const pageJson: object = await page.json();
-        return { pageJson };
+        const fetchedPage: IFetch = await fetch('http://159.89.116.112/adriana/wp-json/wp/v2/pages/2');
+        const page: object = await fetchedPage.json();
+
+        // Todo: I18n menu
+        const fetchedMenu: IFetch = await fetch('http://159.89.116.112/adriana/wp-json/wp-api-menus/v2/menus/15');
+        const menu: object = await fetchedMenu.json();
+
+        return { page, menu };
     }
 
     render() {
-        const { pageJson } = this.props;
-        const content: string = pageJson.content.rendered;
+        const { page, menu  } = this.props;
+        const content = page.content.rendered;
 
         return (
-          <Layout>
-            <div>
-              <h1>Hello World.</h1>
-              <div dangerouslySetInnerHTML={{__html: content }} />
-            </div>
-          </Layout>
+            <Layout menu={menu}>
+                <div>
+                    <h1>Hello World.</h1>
+                    <div dangerouslySetInnerHTML={{__html: content }} />
+                </div>
+            </Layout>
         );
     }
 }
