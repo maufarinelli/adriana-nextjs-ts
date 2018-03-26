@@ -12,23 +12,27 @@ interface IFetch {
 }
 
 class Home extends React.Component<any, AppProps> {
-    static async getInitialProps(): Promise<object> {
+    static async getInitialProps({pathname, query}): Promise<object> {
+
         const fetchedPage: IFetch = await fetch('http://159.89.116.112/adriana/wp-json/wp/v2/pages/2');
         const page: object = await fetchedPage.json();
 
         // Todo: I18n menu
-        const fetchedMenu: IFetch = await fetch('http://159.89.116.112/adriana/wp-json/wp-api-menus/v2/menus/15');
-        const menu: object = await fetchedMenu.json();
+        const fetchedMenuEn: IFetch = await fetch('http://159.89.116.112/adriana/wp-json/wp-api-menus/v2/menus/15');
+        const fetchedMenuFr: IFetch = await fetch('http://159.89.116.112/adriana/wp-json/wp-api-menus/v2/menus/16');
 
-        return { page, menu };
+        const menu: object = query.lang === 'fr' ? await fetchedMenuFr.json() : await fetchedMenuEn.json();
+        const menuOtherLang: object = query.lang !== 'fr' ? await fetchedMenuFr.json() : await fetchedMenuEn.json();
+
+        return { page, menu, menuOtherLang, query, pathname };
     }
 
     render() {
-        const { page, menu  } = this.props;
+        const { page, menu, menuOtherLang, query, pathname } = this.props;
         const content = page.content.rendered;
 
         return (
-            <Layout menu={menu}>
+            <Layout menu={menu} menuOtherLang={menuOtherLang} pathname={pathname}>
                 <div>
                     <h1>Hello World.</h1>
                     <div dangerouslySetInnerHTML={{__html: content }} />

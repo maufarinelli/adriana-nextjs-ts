@@ -5,10 +5,12 @@ import Nav from './Nav';
 interface ILayout {
     children?: JSX.Element,
     title?: string,
-    menu: object
+    menu: object,
+    menuOtherLang: object,
+    pathname: string
 }
 
-const Layout = ({children = undefined, title = 'This is the default title', menu}: ILayout) => (
+const Layout = ({children = undefined, title = 'This is the default title', menu, menuOtherLang, pathname}: ILayout) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -16,7 +18,7 @@ const Layout = ({children = undefined, title = 'This is the default title', menu
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
-      <Nav menu={menu} />
+      <Nav menu={menu} menuOtherLang={menuOtherLang} pathname={pathname} />
     </header>
     {children}
     <footer>
