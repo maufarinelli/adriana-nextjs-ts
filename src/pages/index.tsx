@@ -32,7 +32,7 @@ class Home extends React.Component<any, AppProps> {
         const content = page.content.rendered;
 
         return (
-            <Layout menu={menu} menuOtherLang={menuOtherLang} pathname={pathname}>
+            <Layout menu={menu} menuOtherLang={menuOtherLang} pathname={pathname} lang={(!query.lang) ? 'en' : query.lang}>
                 <div>
                     <h1>Hello World.</h1>
                     <div dangerouslySetInnerHTML={{__html: content }} />
