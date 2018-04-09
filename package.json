@@ -8,12 +8,14 @@
     "build": "next build ./dist",
     "predev": "tsc",
     "dev": "concurrently \"npm run watch:tsc\" \"next ./dist\"",
-    "start": "next start ./dist",
+    "start": "next start ./dist --inspect",
     "tsc": "tsc",
-    "watch:tsc": "tsc --watch"
+    "watch:tsc": "tsc --watch",
+    "prod": "pm2 start npm --name \"next\" -- start"
   },
   "dependencies": {
     "isomorphic-unfetch": "^2.0.0",
+    "lodash": "^4.17.5",
     "next": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -23,6 +25,7 @@
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@types/node": "^8.5.7",
+    "@types/lodash": "^4.14.106",
     "concurrently": "^3.5.1",
     "typescript": "^2.7.2"
   }
