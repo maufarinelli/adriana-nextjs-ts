@@ -4,10 +4,10 @@ import Layout from '../components/Layout';
 import IPageProps from '../../interfaces/IPageProps';
 import { fetchCurrentPage, fetchMenu, fetchMenuOtherLang } from '../helpers/helpers';
 
-const FR_URL = 'http://159.89.116.112/adriana/wp-json/wp/v2/pages/55';
-const EN_URL = 'http://159.89.116.112/adriana/wp-json/wp/v2/pages/52';
+const FR_URL = 'http://159.89.116.112/adriana/wp-json/wp/v2/pages/8';
+const EN_URL = 'http://159.89.116.112/adriana/wp-json/wp/v2/pages/4';
 
-class Home extends React.Component<any, IPageProps> {
+class About extends React.Component<any, IPageProps> {
     static async getInitialProps({pathname, query}): Promise<object> {
         const page: object = await fetchCurrentPage(FR_URL, EN_URL, query);
         const menu: object = await fetchMenu(query);
@@ -22,7 +22,7 @@ class Home extends React.Component<any, IPageProps> {
         const title: string = page.title.rendered;
 
         return (
-            <Layout menu={menu} menuOtherLang={menuOtherLang} pathname={pathname} lang={(!query.lang) ? 'en' : query.lang}>
+            <Layout menu={menu} menuOtherLang={menuOtherLang} pathname={pathname} lang={!query.lang ? 'en' : query.lang}>
                 <div>
                     <h1>{title}</h1>
                     <div dangerouslySetInnerHTML={{__html: content }} />
@@ -32,4 +32,4 @@ class Home extends React.Component<any, IPageProps> {
     }
 }
 
-export default Home;
+export default About;
