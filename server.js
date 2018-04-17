@@ -6,7 +6,9 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-//const { about } = require('./routes/about');
+const { about, aPropos } = require('./routes/about');
+const { blog, blogFr } = require('./routes/blog');
+const { contact, contactFr } = require('./routes/contact');
 
 app.prepare().then(() => {
   const server = express();
@@ -22,17 +24,15 @@ app.prepare().then(() => {
     }
   });
 
-  //about(server, app);
+  about(server, app);
+  aPropos(server, app);
+  blog(server, app);
+  blogFr(server, app);
+  contact(server, app);
+  contactFr(server, app);
 
-  server.get('/a-propos', (req, res) => {
-    const parsedUrl = parse(req.url, true);
-    const { query } = parsedUrl;
-
-    if(query.lang === 'fr') {
-      app.render(req, res, '/about', query);
-    } else {
-      app.render(req, res, '/about', query);
-    }
+  server.get('*', (req, res) => {
+    return handle(req, res);
   });
 
   server.listen(3001, err => {
