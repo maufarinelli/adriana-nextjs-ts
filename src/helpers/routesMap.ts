@@ -15,6 +15,11 @@ const blogMap: IMenuMap = {
     fr: '/blog-fr'
 };
 
+const priceMap: IMenuMap = {
+    en: '/price',
+    fr: '/prix'
+};
+
 const contactMap: IMenuMap = {
     en: '/contact',
     fr: '/contact-fr'
@@ -26,6 +31,8 @@ const routesMap = {
     'a-propos': aboutMap,
     'blog': blogMap,
     'blog-fr': blogMap,
+    'price': priceMap,
+    'prix': priceMap,
     'contact': contactMap,
     'contact-fr': contactMap
 };
